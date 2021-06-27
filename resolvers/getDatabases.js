@@ -11,6 +11,7 @@ export async function listNotionDatabases() {
     headers: headers,
   };
 
+  console.debug(new Date(), "fetching databases from Notion")
   const response = await fetch(`https://api.notion.com/v1/databases`, options)
   const responseData = await response.json()
   const results = responseData.results
