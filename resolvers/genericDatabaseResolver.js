@@ -1,3 +1,5 @@
+import camelCase from "lodash.camelcase";
+
 export default async function genericDatabaseResolver(database_id) {
   const secret = process.env.NOTION_API_KEY
 
@@ -23,5 +25,20 @@ export default async function genericDatabaseResolver(database_id) {
   const response = await fetch(`https://api.notion.com/v1/databases/${database_id}/query`, options)
   const responseData = await response.json()
   
-  return responseData.results
+  // Iterate through properties
+  const records = responseData.results.map(obj => {
+    let record = {}
+
+    const properties = Object.keys(obj.properties)
+    const propertiesCamel = properties.map(property => camelCase(property))
+
+    // get value of each property (JSON serialize it temporarily for simplicity)
+    propertiesCamel.forEach((property, index) => {
+      record[property] = JSON.stringify(obj.properties[properties[index]])
+    });
+
+    return record
+  })
+  
+  return records
 }
