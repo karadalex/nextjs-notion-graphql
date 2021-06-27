@@ -2,6 +2,7 @@ import databaseDefs from './databases'
 import { listNotionDatabases } from '../resolvers/getDatabases'
 import camelCase from 'lodash.camelcase'
 import { gql } from 'apollo-server-micro'
+import { getTypeNameFromNotionDatabase, getQueryNameFromNotionDatabase } from '../utils/types'
 
 
 export default async function getDynamicTypeDefs() {
@@ -16,14 +17,9 @@ export default async function getDynamicTypeDefs() {
   databases.forEach(database => {
     // TODO: Title is an array, improve parsing to take into consideration all possible elements
     // of this array
-    let queryName = camelCase(database.title[0].plain_text)
+    let queryName = getQueryNameFromNotionDatabase(database)
     queryNames.push(queryName)
-    // Make first letter capital
-    let typeName = queryName[0].toUpperCase() + queryName.substring(1)
-    // Singularize typename
-    if (typeName[typeName.length-1].toLowerCase() === "s") {
-      typeName = typeName.substring(0, typeName.length-1)
-    }
+    let typeName = getTypeNameFromNotionDatabase(database)
     typeNames.push(typeName)
 
     // Construct new graphql type
