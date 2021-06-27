@@ -39,6 +39,8 @@ export async function getDatabases() {
       return {
         id: database.id,
         title: database.title[0].plain_text,
+        created_time: database.created_time,
+        last_edited_time: database.last_edited_time
       };
     });
   } else {
