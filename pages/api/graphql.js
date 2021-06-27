@@ -1,8 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server-micro'
-import typeDefs from '../../typeDefs'
+import getDynamicTypeDefs from '../../typeDefs'
 import resolvers from '../../resolvers'
-
-const apolloServer = new ApolloServer({ typeDefs, resolvers })
 
 export const config = {
   api: {
@@ -10,4 +8,11 @@ export const config = {
   },
 }
 
-export default apolloServer.createHandler({ path: '/api/graphql' })
+export default async function graphqlServer(req, res) {
+  // Create a dynamic GraphQL Server
+  const typeDefs = await getDynamicTypeDefs()
+  const apolloServer = new ApolloServer({ typeDefs, resolvers })
+  const apolloHandler = apolloServer.createHandler({ path: '/api/graphql' })
+
+  await apolloHandler(req, res)
+}

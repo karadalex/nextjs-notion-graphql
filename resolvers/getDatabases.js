@@ -1,4 +1,4 @@
-export async function getDatabases() {
+export async function listNotionDatabases() {
   const secret = process.env.NOTION_API_KEY
 
   let headers = new Headers();
@@ -14,6 +14,13 @@ export async function getDatabases() {
   const response = await fetch(`https://api.notion.com/v1/databases`, options)
   const responseData = await response.json()
   const results = responseData.results
+
+  return results
+}
+
+
+export async function getDatabases() {
+  const results = await listNotionDatabases()
   if (results.length > 0) {
     return results.map(database => {
       return {
