@@ -9,7 +9,7 @@ A simple GraphQL server for the Notion API using NextJS and Apollo Server (micro
 - [ ] Dynamic Resolvers generation based on Notion Databases
   - [ ] Get resolvers
   - [ ] Update resolvers
-- [ ] Notion API Cache layer
+- [ ] Notion API Caching (To reduce number of calls to the Notion API)
 
 ## Deployment
 
