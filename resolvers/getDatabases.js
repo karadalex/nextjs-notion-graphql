@@ -1,4 +1,4 @@
-export default async function getDatabases(parent, args, context) {
+export async function getDatabases() {
   const secret = process.env.NOTION_API_KEY
 
   let headers = new Headers();
@@ -24,4 +24,9 @@ export default async function getDatabases(parent, args, context) {
   } else {
     return []
   }
+}
+
+
+export default async function getDatabasesResolver(parent, args, context) {
+  return getDatabases()
 }

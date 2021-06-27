@@ -1,21 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server-micro'
-import getDatabases from '../../actions/getDatabases'
-
-const typeDefs = gql`
-  type Query {
-    databases: [Database!]!
-  }
-  type Database {
-    id: ID!,
-    title: String,
-  }
-`
-
-const resolvers = {
-  Query: {
-    databases: getDatabases,
-  },
-}
+import typeDefs from '../../typeDefs'
+import resolvers from '../../resolvers'
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers })
 
