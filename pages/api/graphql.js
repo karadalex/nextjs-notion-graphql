@@ -1,19 +1,19 @@
 import { ApolloServer, gql } from 'apollo-server-micro'
+import getDatabases from '../../actions/getDatabases'
 
 const typeDefs = gql`
   type Query {
-    users: [User!]!
+    databases: [Database!]!
   }
-  type User {
-    name: String
+  type Database {
+    id: ID!,
+    title: String,
   }
 `
 
 const resolvers = {
   Query: {
-    users(parent, args, context) {
-      return [{ name: 'Nextjs' }]
-    },
+    databases: getDatabases,
   },
 }
 
