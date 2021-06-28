@@ -24,7 +24,7 @@ export default async function getDynamicTypeDefs() {
 
     // Construct new graphql type
     const fields = Object.keys(database.properties)
-      .map(property => `${camelCase(property)}:String`)
+      .map(property => `${camelCase(property)}:JSON`)
     const typeDef = gql`
       type ${typeName} {
         ${fields}

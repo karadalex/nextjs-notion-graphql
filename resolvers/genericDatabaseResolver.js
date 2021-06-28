@@ -34,7 +34,7 @@ export default async function genericDatabaseResolver(database_id) {
 
     // get value of each property (JSON serialize it temporarily for simplicity)
     propertiesCamel.forEach((property, index) => {
-      record[property] = JSON.stringify(obj.properties[properties[index]])
+      record[property] = obj.properties[properties[index]]
     });
 
     return record
