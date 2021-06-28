@@ -37,6 +37,7 @@ export default async function genericDatabaseResolver(database_id) {
       record[property] = obj.properties[properties[index]]
     });
 
+    // This record object is a Notion "Page"
     record = {
       object: obj.object,
       id: obj.id,

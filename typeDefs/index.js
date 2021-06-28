@@ -1,4 +1,5 @@
 import databaseDefs from './databases'
+import blockDefs from './blocks'
 import { listNotionDatabases } from '../resolvers/getDatabases'
 import camelCase from 'lodash.camelcase'
 import { gql } from 'apollo-server-micro'
@@ -6,7 +7,7 @@ import { getTypeNameFromNotionDatabase, getQueryNameFromNotionDatabase } from '.
 
 
 export default async function getDynamicTypeDefs() {
-  let typeDefs = [databaseDefs]
+  let typeDefs = [databaseDefs, blockDefs]
 
   // TODO: Improve database fetching below, to reduce amount of API calls
   // to the Notion API (maybe add a cache layer in between)
@@ -34,6 +35,7 @@ export default async function getDynamicTypeDefs() {
         parent: JSON,
         archived: Boolean,
         ${fields}
+        children: BlockChildren
       }
     `
 

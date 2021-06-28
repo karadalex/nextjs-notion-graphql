@@ -10,7 +10,15 @@ export default async function getDynamicResolvers() {
     Query: {
       databases: getDatabasesResolver,
     },
-    JSON: GraphQLJSON
+    JSON: GraphQLJSON,
+    // Resolve Block Interface
+    Block: {
+      __resolveType(obj, context, info) {
+        if (obj.type == "paragraph") {
+          return "ParagraphBlock"
+        }
+      }
+    }
   }
 
   const databases = await listNotionDatabases()
