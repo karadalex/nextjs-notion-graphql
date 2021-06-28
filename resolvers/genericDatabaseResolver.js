@@ -37,6 +37,16 @@ export default async function genericDatabaseResolver(database_id) {
       record[property] = obj.properties[properties[index]]
     });
 
+    record = {
+      object: obj.object,
+      id: obj.id,
+      created_time: obj.created_time,
+      last_edited_time: obj.last_edited_time,
+      parent: obj.parent,
+      archived: obj.archived,
+      ...record,
+    }
+
     return record
   })
   

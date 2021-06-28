@@ -27,6 +27,12 @@ export default async function getDynamicTypeDefs() {
       .map(property => `${camelCase(property)}:JSON`)
     const typeDef = gql`
       type ${typeName} {
+        object: String!,
+        id: ID!,
+        created_time: String!,
+        last_edited_time: String!,
+        parent: JSON,
+        archived: Boolean,
         ${fields}
       }
     `
