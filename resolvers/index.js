@@ -3,6 +3,7 @@ import { listNotionDatabases } from './getDatabases'
 import { getTypeNameFromNotionDatabase, getQueryNameFromNotionDatabase } from '../utils/types'
 import genericDatabaseResolver from './genericDatabaseResolver'
 import GraphQLJSON from 'graphql-type-json'
+import BlockResolver from './blockResolver'
 
 
 export default async function getDynamicResolvers() {
@@ -12,13 +13,7 @@ export default async function getDynamicResolvers() {
     },
     JSON: GraphQLJSON,
     // Resolve Block Interface
-    Block: {
-      __resolveType(obj, context, info) {
-        if (obj.type == "paragraph") {
-          return "ParagraphBlock"
-        }
-      }
-    }
+    Block: BlockResolver
   }
 
   const databases = await listNotionDatabases()

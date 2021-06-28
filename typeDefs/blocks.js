@@ -40,4 +40,14 @@ export default gql`
     text: JSON,
     children: JSON
   }
+
+  type HeadingBlock implements Block {
+    object: String!,
+    id: ID!,
+    type: BlockType,
+    created_time: String,
+    last_edited_time: String
+    has_children: Boolean
+    text: JSON,
+  }
 `
