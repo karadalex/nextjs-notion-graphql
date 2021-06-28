@@ -2,6 +2,7 @@ import getDatabasesResolver from './getDatabases'
 import { listNotionDatabases } from './getDatabases'
 import { getTypeNameFromNotionDatabase, getQueryNameFromNotionDatabase } from '../utils/types'
 import genericDatabaseResolver from './genericDatabaseResolver'
+import GraphQLJSON from 'graphql-type-json'
 
 
 export default async function getDynamicResolvers() {
@@ -9,6 +10,7 @@ export default async function getDynamicResolvers() {
     Query: {
       databases: getDatabasesResolver,
     },
+    JSON: GraphQLJSON
   }
 
   const databases = await listNotionDatabases()

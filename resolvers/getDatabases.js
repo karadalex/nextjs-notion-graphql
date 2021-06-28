@@ -37,10 +37,12 @@ export async function getDatabases() {
   if (results.length > 0) {
     return results.map((database) => {
       return {
+        object: database.object,
         id: database.id,
-        title: database.title[0].plain_text,
         created_time: database.created_time,
-        last_edited_time: database.last_edited_time
+        last_edited_time: database.last_edited_time,
+        title: database.title[0].plain_text,
+        properties: database.properties
       };
     });
   } else {
