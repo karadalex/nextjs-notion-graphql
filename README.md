@@ -11,6 +11,31 @@ A simple GraphQL server for the Notion API using NextJS and Apollo Server (micro
 - [ ] Delete mutators
 - [x] Notion API Caching (To reduce number of calls to the Notion API)
 
+## Examples
+
+### Database
+
+Consider the following Notion database, on its own page
+![](./docs/img/notion-database-structure.png)
+
+then an example query for this database is the following (the schema was generated automatically)
+```graphql
+query {
+	blogPosts {
+    id
+    created_time
+    children {
+      results {
+        type
+        ...on GenericTextAndChildrenBlock {
+          text
+        }
+      }
+    }
+  }
+}
+```
+
 ## Deployment
 
 Deploy the example using [Vercel](https://vercel.com?utm_source=github):
