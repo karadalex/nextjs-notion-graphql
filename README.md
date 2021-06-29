@@ -21,7 +21,7 @@ Consider the following Notion database, on its own page
 then an example query for this database is the following (the schema was generated automatically)
 ```graphql
 query {
-	blogPosts {
+  blogPosts {
     id
     created_time
     children {
