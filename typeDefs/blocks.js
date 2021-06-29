@@ -30,7 +30,7 @@ export default gql`
     and unsupported
   }
 
-  type ParagraphBlock implements Block {
+  type GenericTextAndChildrenBlock implements Block {
     object: String!,
     id: ID!,
     type: BlockType,
@@ -49,5 +49,27 @@ export default gql`
     last_edited_time: String
     has_children: Boolean
     text: JSON,
+  }
+
+  type TodoBlock implements Block {
+    object: String!,
+    id: ID!,
+    type: BlockType,
+    created_time: String,
+    last_edited_time: String
+    has_children: Boolean
+    text: JSON,
+    checked: Boolean,
+    children: JSON
+  }
+
+  type ChildPageBlock implements Block {
+    object: String!,
+    id: ID!,
+    type: BlockType,
+    created_time: String,
+    last_edited_time: String
+    has_children: Boolean
+    title: String
   }
 `
