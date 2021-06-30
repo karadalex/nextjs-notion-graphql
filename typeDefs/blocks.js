@@ -30,16 +30,46 @@ export default gql`
     and unsupported
   }
 
+  enum RichTextType {
+    text
+    mention
+    equation
+  }
+
+  type TextAndChildrenObject {
+    text: [RichTextObject],
+    children: [Block]
+  }
+
+  type TextObject {
+    text: [RichTextObject]
+  }
+
+  type TodoObject {
+    text: [RichTextObject],
+    checked: Boolean
+    children: [Block]
+  }
+
+  type TitleObject {
+    title: String
+  }
+
+  type RichTextObject {
+    plain_text: String,
+    href: String,
+    annotations: JSON,
+    type: RichTextType
+  }
+
   type ParagraphBlock implements Block {
     object: String!,
     id: ID!,
     type: BlockType,
     created_time: String,
     last_edited_time: String
-    has_children: Boolean
-    text: JSON,
-    children: JSON,
-    paragraph: JSON
+    has_children: Boolean,
+    paragraph: TextAndChildrenObject
   }
 
   type Heading1Block implements Block {
@@ -49,8 +79,7 @@ export default gql`
     created_time: String,
     last_edited_time: String
     has_children: Boolean
-    text: JSON,
-    heading_1: JSON
+    heading_1: TextObject
   }
 
   type Heading2Block implements Block {
@@ -60,8 +89,7 @@ export default gql`
     created_time: String,
     last_edited_time: String
     has_children: Boolean
-    text: JSON,
-    heading_2: JSON
+    heading_2: TextObject
   }
 
   type Heading3Block implements Block {
@@ -71,8 +99,7 @@ export default gql`
     created_time: String,
     last_edited_time: String
     has_children: Boolean
-    text: JSON,
-    heading_3: JSON
+    heading_3: TextObject
   }
 
   type BulletedListItemBlock implements Block {
@@ -82,7 +109,6 @@ export default gql`
     created_time: String,
     last_edited_time: String
     has_children: Boolean
-    text: JSON,
     bulleted_list_item: JSON
   }
 
@@ -94,7 +120,7 @@ export default gql`
     last_edited_time: String
     has_children: Boolean
     text: JSON,
-    numbered_list_item: JSON
+    numbered_list_item: TextAndChildrenObject
   }
 
   type TodoBlock implements Block {
@@ -104,10 +130,7 @@ export default gql`
     created_time: String,
     last_edited_time: String
     has_children: Boolean
-    text: JSON,
-    checked: Boolean,
-    children: JSON,
-    to_do: JSON
+    to_do: TodoObject
   }
 
   type ToggleBlock implements Block {
@@ -117,9 +140,7 @@ export default gql`
     created_time: String,
     last_edited_time: String
     has_children: Boolean
-    text: JSON,
-    children: JSON,
-    toggle: JSON
+    toggle: TextAndChildrenObject
   }
 
   type ChildPageBlock implements Block {
@@ -129,8 +150,7 @@ export default gql`
     created_time: String,
     last_edited_time: String
     has_children: Boolean
-    title: String,
-    child_page: JSON
+    child_page: TitleObject
   }
 
   type UnsupportedBlock implements Block {

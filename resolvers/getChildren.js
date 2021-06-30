@@ -14,7 +14,7 @@ export async function getChildren(blockId) {
 
   const response = await fetch(`https://api.notion.com/v1/blocks/${blockId}/children`, options)
   const responseData = await response.json()
-  console.log(responseData)
+  
   return responseData
 }
 

@@ -30,7 +30,11 @@ query {
       results {
         type
         ...on ParagraphBlock {
-          paragraph
+          paragraph {
+            text {
+              plain_text
+            }
+          }
         }
       }
     }
