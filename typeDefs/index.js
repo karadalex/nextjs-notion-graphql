@@ -35,6 +35,7 @@ export default async function getDynamicTypeDefs() {
         parent: JSON,
         archived: Boolean,
         ${fields}
+        # children: JSON
         children: BlockChildren
       }
     `

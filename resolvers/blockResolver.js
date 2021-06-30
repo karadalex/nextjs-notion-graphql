@@ -1,26 +1,28 @@
 export default {
   __resolveType(obj, context, info) {
-    
-    textAndChildrenBlocks = ["paragraph", "bulleted_list_item", "numbered_list_item", "toggle"]
-    if (obj.type in textAndChildrenBlocks) {
-      return "GenericTextAndChildrenBlock"
-    }
-
-    if (obj.type === "to_do") {
-      return "TodoBlock"
-    }
-
-    headingBlocks = ["heading_1", "heading_2", "heading_3"]
-    if (obj.type === "heading_1" || obj.type === "heading_2" || obj.type === "heading_3") {
-      return "HeadingBlock"
-    }
-
-    if (obj.type === "child_page") {
-      return "TodoBlock"
-    }
-
-    if (obj.type === "unsupported") {
-      return "Block"
+    switch (obj.type) {
+      case "paragraph":
+        return "ParagraphBlock"
+      case "heading_1":
+        return "Heading1Block"
+      case "heading_2":
+        return "Heading2Block"
+      case "heading_3":
+        return "Heading3Block"
+      case "bulleted_list_item":
+        return "BulletedListItemBlock"
+      case "numbered_list_item":
+        return "NumberedListItemBlock"
+      case "to_do":
+        return "TodoBlock"
+      case "toggle":
+        return "ToggleBlock"
+      case "child_page":
+        return "ChildPageBlock"
+      case "unsupported":
+        return "UnsupportedBlock"
+      default:
+        return "UnsupportedBlock"
     }
   }
 }

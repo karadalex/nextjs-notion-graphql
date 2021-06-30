@@ -25,10 +25,12 @@ query {
     id
     created_time
     children {
+      object
+      has_more
       results {
         type
-        ...on GenericTextAndChildrenBlock {
-          text
+        ...on ParagraphBlock {
+          paragraph
         }
       }
     }

@@ -1,4 +1,5 @@
 import camelCase from "lodash.camelcase";
+import { getChildren } from "./getChildren";
 
 export default async function genericDatabaseResolver(database_id) {
   const secret = process.env.NOTION_API_KEY
@@ -46,6 +47,7 @@ export default async function genericDatabaseResolver(database_id) {
       parent: obj.parent,
       archived: obj.archived,
       ...record,
+      children: getChildren(obj.id)
     }
 
     return record
