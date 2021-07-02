@@ -41,6 +41,18 @@ query {
   }
 }
 ```
+Another example is the following search query that searches using the search API endpoint
+```graphql
+query {
+  search(parameters: {
+    query: "blog post",
+    sort: {
+      direction: descending
+      timestamp: last_edited_time
+    }
+  })
+}
+```
 
 ## Deployment
 

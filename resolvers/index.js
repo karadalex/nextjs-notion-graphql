@@ -4,12 +4,14 @@ import { getTypeNameFromNotionDatabase, getQueryNameFromNotionDatabase } from '.
 import genericDatabaseResolver from './genericDatabaseResolver'
 import GraphQLJSON from 'graphql-type-json'
 import BlockResolver from './blockResolver'
+import searchResolver from './searchResolver'
 
 
 export default async function getDynamicResolvers() {
   let resolvers = {
     Query: {
       databases: getDatabasesResolver,
+      search: searchResolver
     },
     JSON: GraphQLJSON,
     // Resolve Block Interface
